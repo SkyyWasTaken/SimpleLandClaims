@@ -1,0 +1,5 @@
+name: Simple Land Claims
+version: 0.0.1 INDEV
+author: SkyyWasTaken
+main: com.skyywastaken.simplelandclaims.SimpleLandClaims
+api-version: 1.18.1
