@@ -23,7 +23,7 @@ public class SLCPosOneCommand implements SubCommand {
             if(playerLocation.getWorld() == null) {
                 return;
             }
-            this.CLAIM_TRACKER.addProspectivePos1(player.getUniqueId(), playerLocation);
+            this.CLAIM_TRACKER.getClaimCreationHelper().addPosOneForPlayer(player.getUniqueId(), playerLocation);
             commandSender.sendMessage(ChatColor.GREEN + "Successfully set pos1 to (" + playerLocation.getBlockX()
                     + ", " + playerLocation.getBlockZ() + "), dimension " + playerLocation.getWorld().getEnvironment());
         } else {

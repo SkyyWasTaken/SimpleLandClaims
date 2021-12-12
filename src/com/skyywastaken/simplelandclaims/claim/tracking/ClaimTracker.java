@@ -37,38 +37,6 @@ public class ClaimTracker {
         this.CLAIMS.add(new LandClaim(newOwner, location1, location2));
     }
 
-    public void addProspectivePos1(UUID claimMaker, Location position) {
-        this.claimCreationHelper.addPosOneForPlayer(claimMaker, position);
-    }
-
-    public void addProspectivePos2(UUID claimMaker, Location position) {
-        this.claimCreationHelper.addPosTwoForPlayer(claimMaker, position);
-    }
-
-    public Location getProspectivePos1(UUID claimMaker) {
-        return this.claimCreationHelper.getPosOneForPlayer(claimMaker);
-    }
-
-    public Location getProspectivePos2(UUID claimMaker) {
-        return this.claimCreationHelper.getPosTwoForPlayer(claimMaker);
-    }
-
-    public boolean playerHasBothPositionsSet(UUID player) {
-        return this.claimCreationHelper.playerHasBothPositions(player);
-    }
-
-    public boolean prospectiveClaimIsTooWide(UUID player) {
-        return this.claimCreationHelper.getWidth(player) > 500;
-    }
-
-    public boolean prospectiveClaimIsTooDeep(UUID player) {
-        return this.claimCreationHelper.getDepth(player) > 500;
-    }
-
-    public boolean prospectiveClaimHasBothPointsInSameDimension(UUID player) {
-        return this.claimCreationHelper.bothPositionsAreInSameDimension(player);
-    }
-
     public boolean playerHasTwentyOrMoreClaims(UUID player) {
         int claimCount = 0;
         for(LandClaim claim : this.CLAIMS) {

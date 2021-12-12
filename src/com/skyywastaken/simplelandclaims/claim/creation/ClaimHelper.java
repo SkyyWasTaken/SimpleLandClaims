@@ -18,12 +18,12 @@ public class ClaimHelper {
         this.potentialClaimPositions.get(playerUUID).setPos2(passedLocation);
     }
 
-    public int getWidth(UUID playerToCheck) {
-        return this.potentialClaimPositions.get(playerToCheck).getWidth();
+    public boolean claimIsTooWide(UUID playerUUID) {
+        return this.potentialClaimPositions.get(playerUUID).getWidth() > 500;
     }
 
-    public int getDepth(UUID playerToCheck) {
-        return this.potentialClaimPositions.get(playerToCheck).getDepth();
+    public boolean claimIsTooDeep(UUID playerUUID) {
+        return this.potentialClaimPositions.get(playerUUID).getDepth() > 500;
     }
 
     public Location getPosOneForPlayer(UUID playerToGet) {

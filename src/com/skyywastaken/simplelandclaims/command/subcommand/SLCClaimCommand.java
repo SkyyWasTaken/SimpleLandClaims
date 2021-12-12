@@ -1,5 +1,6 @@
 package com.skyywastaken.simplelandclaims.command.subcommand;
 
+import com.skyywastaken.simplelandclaims.claim.creation.ClaimHelper;
 import com.skyywastaken.simplelandclaims.claim.tracking.ClaimTracker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -52,23 +53,25 @@ public class SLCClaimCommand implements SubCommand{
         if(!checkPreConditionsAndWarn(landClaimer, newLandOwner)) {
             return;
         }
-        Location pos1 = this.CLAIM_TRACKER.getProspectivePos1(landClaimer.getUniqueId());
-        Location pos2 = this.CLAIM_TRACKER.getProspectivePos2(landClaimer.getUniqueId());
+        ClaimHelper claimCreationHelper = this.CLAIM_TRACKER.getClaimCreationHelper();
+        Location pos1 = claimCreationHelper.getPosOneForPlayer(landClaimer.getUniqueId());
+        Location pos2 = claimCreationHelper.getPosTwoForPlayer(landClaimer.getUniqueId());
         this.CLAIM_TRACKER.createClaim(newLandOwner, pos1, pos2);
     }
 
     private boolean checkPreConditionsAndWarn(Player landClaimer, UUID owner) {
-        if(!this.CLAIM_TRACKER.playerHasBothPositionsSet(landClaimer.getUniqueId())) {
+        ClaimHelper claimHelper = this.CLAIM_TRACKER.getClaimCreationHelper();
+        if(!claimHelper.playerHasBothPositions(landClaimer.getUniqueId())) {
             landClaimer.sendMessage("You don't have both of your positions set! Use /slc pos1 and "
                     + "/slc pos2 to select an area!");
             return false;
-        } else if (this.CLAIM_TRACKER.prospectiveClaimIsTooWide(landClaimer.getUniqueId())) {
+        } else if (claimHelper.claimIsTooWide(landClaimer.getUniqueId())) {
             landClaimer.sendMessage("Your claim is too wide! Make the x length 500 blocks or less!");
             return false;
-        } else if (this.CLAIM_TRACKER.prospectiveClaimIsTooDeep(landClaimer.getUniqueId())) {
+        } else if (claimHelper.claimIsTooDeep(landClaimer.getUniqueId())) {
             landClaimer.sendMessage("Your claim is too deep! Make the Z length 500 blocks or less!");
             return false;
-        } else if(!this.CLAIM_TRACKER.prospectiveClaimHasBothPointsInSameDimension(landClaimer.getUniqueId())) {
+        } else if(!claimHelper.bothPositionsAreInSameDimension(landClaimer.getUniqueId())) {
             landClaimer.sendMessage("Your claim spans multiple dimensions! That's definitely not allowed!");
             return false;
         } else if(this.CLAIM_TRACKER.playerHasTwentyOrMoreClaims(owner)) {

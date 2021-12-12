@@ -22,7 +22,7 @@ public class SLCPosTwoCommand implements SubCommand {
             if(playerLocation.getWorld() == null) {
                 return;
             }
-            this.CLAIM_TRACKER.addProspectivePos2(player.getUniqueId(), playerLocation);
+            this.CLAIM_TRACKER.getClaimCreationHelper().addPosTwoForPlayer(player.getUniqueId(), playerLocation);
             commandSender.sendMessage(ChatColor.GREEN + "Successfully set pos2 to (" + playerLocation.getBlockX()
                     + ", " + playerLocation.getBlockZ() + "), dimension " + playerLocation.getWorld().getEnvironment());
         } else {
