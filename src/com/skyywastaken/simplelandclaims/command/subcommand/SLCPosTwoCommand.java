@@ -39,4 +39,11 @@ public class SLCPosTwoCommand implements SubCommand {
     public String getName() {
         return "pos2";
     }
+
+    @Override
+    public String getPermission() {
+        return "slc.claim.pos2";
+    }
+
+
 }

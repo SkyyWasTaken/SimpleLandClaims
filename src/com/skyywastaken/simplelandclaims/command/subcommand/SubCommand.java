@@ -9,4 +9,6 @@ public interface SubCommand {
     void executeCommand(CommandSender commandSender, Command command, String[] args);
     List<String> getTabCompletions(CommandSender commandSender, Command command, String s, String[] strings);
     String getName();
+
+    String getPermission();
 }

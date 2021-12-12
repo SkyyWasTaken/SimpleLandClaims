@@ -17,7 +17,6 @@ public class SLCPosOneCommand implements SubCommand {
     }
     @Override
     public void executeCommand(CommandSender commandSender, Command command, String[] args) {
-        System.out.println("yes");
         if(commandSender instanceof Player player) {
             Location playerLocation = player.getLocation();
             if(playerLocation.getWorld() == null) {
@@ -39,5 +38,10 @@ public class SLCPosOneCommand implements SubCommand {
     @Override
     public String getName() {
         return "pos1";
+    }
+
+    @Override
+    public String getPermission() {
+        return "slc.claim.pos1";
     }
 }

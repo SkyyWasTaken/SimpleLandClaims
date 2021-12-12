@@ -20,9 +20,6 @@ public class SLCCheckCommand implements SubCommand {
     }
     @Override
     public void executeCommand(CommandSender commandSender, Command command, String[] args) {
-        if(!commandSender.hasPermission("slc.check")) {
-            commandSender.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
-        }
         if(commandSender instanceof Player player) {
             if(this.CLAIM_TRACKER.posIsInClaim(player.getLocation())) {
                 for(UUID uuid : this.CLAIM_TRACKER.getOwnersFromLocation(player.getLocation())) {
@@ -43,5 +40,10 @@ public class SLCCheckCommand implements SubCommand {
     @Override
     public String getName() {
         return "check";
+    }
+
+    @Override
+    public String getPermission() {
+        return "slc.check";
     }
 }

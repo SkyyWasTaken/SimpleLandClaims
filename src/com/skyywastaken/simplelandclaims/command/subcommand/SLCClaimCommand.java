@@ -90,4 +90,9 @@ public class SLCClaimCommand implements SubCommand{
     public String getName() {
         return "claim";
     }
+
+    @Override
+    public String getPermission() {
+        return "slc.claim";
+    }
 }

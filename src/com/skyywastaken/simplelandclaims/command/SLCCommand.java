@@ -6,6 +6,7 @@ import com.skyywastaken.simplelandclaims.command.subcommand.SLCClaimCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCPosOneCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCPosTwoCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SubCommand;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -31,6 +32,11 @@ public class SLCCommand implements CommandExecutor, TabCompleter {
         }
         System.out.println(args[0]);
         if(subCommandHashMap.containsKey(args[0])) {
+            SubCommand subCommand = subCommandHashMap.get(args[0]);
+            if (commandSender.hasPermission(subCommand.getPermission())) {
+                commandSender.sendMessage(ChatColor.BOLD + "" + ChatColor.RED
+                        + "You do not have permission to use this command.");
+            }
             subCommandHashMap.get(args[0]).executeCommand(commandSender, command, Arrays.copyOfRange(args, 1, args.length));
         }
         return true;
