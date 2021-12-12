@@ -1,4 +1,6 @@
-package com.skyywastaken.simplelandclaims.claim;
+package com.skyywastaken.simplelandclaims.claim.creation;
+
+import com.skyywastaken.simplelandclaims.claim.creation.ClaimPosition;
 
 public class PlayerClaimPositions {
     private ClaimPosition pos1 = null;
