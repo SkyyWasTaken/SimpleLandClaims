@@ -2,6 +2,7 @@ package com.skyywastaken.simplelandclaims.command.subcommand;
 
 import com.skyywastaken.simplelandclaims.claim.creation.ClaimHelper;
 import com.skyywastaken.simplelandclaims.claim.tracking.ClaimTracker;
+import com.skyywastaken.simplelandclaims.command.CommandUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -50,13 +51,15 @@ public class SLCClaimCommand implements SubCommand{
     }
 
     private void handleSuccessfulClaimAttempt(UUID newLandOwner, Player landClaimer) {
-        if(!checkPreConditionsAndWarn(landClaimer, newLandOwner)) {
+        if (!checkPreConditionsAndWarn(landClaimer, newLandOwner)) {
             return;
         }
         ClaimHelper claimCreationHelper = this.CLAIM_TRACKER.getClaimCreationHelper();
         Location pos1 = claimCreationHelper.getPosOneForPlayer(landClaimer.getUniqueId());
         Location pos2 = claimCreationHelper.getPosTwoForPlayer(landClaimer.getUniqueId());
         this.CLAIM_TRACKER.createClaim(newLandOwner, pos1, pos2);
+        landClaimer.sendMessage(ChatColor.GREEN + "Land claimed successfully!");
+        CommandUtils.playSuccessSound(landClaimer);
     }
 
     private boolean checkPreConditionsAndWarn(Player landClaimer, UUID owner) {

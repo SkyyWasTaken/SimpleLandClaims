@@ -4,16 +4,21 @@ import com.skyywastaken.simplelandclaims.claim.creation.ClaimHelper;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 public class ClaimTracker {
     private final transient ClaimHelper claimCreationHelper = new ClaimHelper();
-    private final ArrayList<LandClaim> CLAIMS = new ArrayList<>();
+    private final LinkedList<LandClaim> CLAIMS = new LinkedList<>();
+
+    public void removeClaim(LandClaim landClaim) {
+        this.CLAIMS.remove(landClaim);
+    }
 
     public boolean posIsInMobProtectedClaim(Location location) {
-        for(LandClaim currentClaim : CLAIMS) {
-            if(currentClaim.isMobGriefingDisabled() && currentClaim.positionIsInClaim(location)) {
+        for (LandClaim currentClaim : CLAIMS) {
+            if (currentClaim.isMobGriefingDisabled() && currentClaim.positionIsInClaim(location)) {
                 return true;
             }
         }
@@ -25,12 +30,22 @@ public class ClaimTracker {
     }
 
     public boolean posIsInClaim(Location location) {
-        for(LandClaim currentClaim : CLAIMS) {
-            if(currentClaim.positionIsInClaim(location)) {
+        for (LandClaim currentClaim : CLAIMS) {
+            if (currentClaim.positionIsInClaim(location)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public LinkedList<LandClaim> getLandClaimsAtPosition(Location locationToCheck) {
+        LinkedList<LandClaim> claims = new LinkedList<>();
+        for (LandClaim claim : this.CLAIMS) {
+            if (claim.positionIsInClaim(locationToCheck)) {
+                claims.add(claim);
+            }
+        }
+        return claims;
     }
 
     public void createClaim(UUID newOwner, Location location1, Location location2) {
@@ -39,8 +54,8 @@ public class ClaimTracker {
 
     public boolean playerHasTwentyOrMoreClaims(UUID player) {
         int claimCount = 0;
-        for(LandClaim claim : this.CLAIMS) {
-            if(claim.getOwner().equals(player)) {
+        for (LandClaim claim : this.CLAIMS) {
+            if (claim.getOwner().equals(player)) {
                 claimCount++;
             }
         }

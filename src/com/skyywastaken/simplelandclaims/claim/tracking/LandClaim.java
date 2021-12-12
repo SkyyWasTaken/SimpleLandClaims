@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class LandClaim {
-    private UUID owner;
+    private final UUID owner;
     private ArrayList<UUID> members;
     private ClaimPosition pos1;
     private ClaimPosition pos2;
@@ -30,8 +30,16 @@ public class LandClaim {
         this.pos2 = new ClaimPosition(higherX, higherZ, pos1.getWorld().getEnvironment());
     }
 
+    public ClaimPosition getPosOne() {
+        return this.pos1;
+    }
+
+    public ClaimPosition getPosTwo() {
+        return this.pos2;
+    }
+
     public boolean positionIsInClaim(Location location) {
-        if(location.getWorld() == null) {
+        if (location.getWorld() == null) {
             return false;
         }
         return location.getWorld().getEnvironment() == pos1.dimension()
@@ -39,7 +47,7 @@ public class LandClaim {
                 && (location.getBlockX() < pos2.x() && location.getBlockZ() < pos2.z());
     }
 
-    UUID getOwner() {
+    public UUID getOwner() {
         return this.owner;
     }
 
