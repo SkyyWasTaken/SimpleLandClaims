@@ -1,0 +1,42 @@
+name: SimpleLandClaims
+version: 0.0.1 INDEV
+author: SkyyWasTaken
+main: com.skyywastaken.simplelandclaims.SimpleLandClaims
+api-version: 1.18
+
+commands:
+  slc:
+    description: The main claim command. This is used to create and manage claims.
+    Example: /<command> help - displays information about the available claim commands.
+
+permissions:
+  slc.claim:
+    description: Allows the player to claim land
+    children:
+      slc.claim.pos1:
+        description: Allows the player to set the first claim position
+        default: true
+      slc.claim.pos2:
+        description: Allows the player to set the second claim position
+        default: true
+      slc.claim.self:
+        default: true
+      slc.claim.others:
+        default: op
+  slc.check:
+    description: Allows the player to check who (if anyone) has active claims where they're standing.
+    default: true
+  slc.listclaims:
+    description: Allows the player to check their active claims
+    children:
+      slc.listclaims.self:
+        default: true
+      slc.listclaims.others:
+        default: op
+  slc.removeclaim:
+    description: allows the player to remove land claims
+    children:
+      slc.removeclaim.self:
+        default: true
+      slc.removeclaim.others:
+        default: op
