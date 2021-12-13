@@ -52,7 +52,7 @@ public class SLCRemoveCommand implements SubCommand {
         if (this.CACHED_CLAIM_RESULTS.containsKey(playerUUID)) {
             int i = 1;
             for (LandClaim currentClaim : this.CACHED_CLAIM_RESULTS.get(playerUUID)) {
-                if (currentClaim.getOwner() == playerUUID && commandSender.hasPermission("slc.removeclaim.self")
+                if (currentClaim.getOwner().equals(playerUUID) && commandSender.hasPermission("slc.removeclaim.self")
                         || currentClaim.getOwner() != playerUUID
                         && commandSender.hasPermission("slc.removeclaim.others")) {
                     possibleCompletionList.add(Integer.toString(i));
@@ -124,7 +124,7 @@ public class SLCRemoveCommand implements SubCommand {
         if (claim.getOwner() != player.getUniqueId() && !player.hasPermission("slc.removeclaim.others")) {
             player.sendMessage(ChatColor.RED + "You don't have permission to remove someone else's claim!");
             return;
-        } else if (claim.getOwner() == player.getUniqueId() && !player.hasPermission("slc.removeclaim.self")) {
+        } else if (claim.getOwner().equals(player.getUniqueId()) && !player.hasPermission("slc.removeclaim.self")) {
             player.sendMessage("You don't have permission to remove your own claims!");
             return;
         }

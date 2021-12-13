@@ -46,7 +46,7 @@ public class SLCToggleMobGriefingCommand implements SubCommand {
         UUID playerUUID = player.getUniqueId();
         if (this.CACHED_CLAIMS.containsKey(playerUUID)) {
             for (LandClaim currentClaim : this.CACHED_CLAIMS.get(playerUUID)) {
-                if (currentClaim.getOwner() == playerUUID
+                if (currentClaim.getOwner().equals(playerUUID)
                         && commandSender.hasPermission("slc.togglemobgriefing.self")
                         || currentClaim.getOwner() != playerUUID
                         && commandSender.hasPermission("slc.togglemobgriefing.others")) {
@@ -97,7 +97,7 @@ public class SLCToggleMobGriefingCommand implements SubCommand {
                 && !player.hasPermission("slc.togglemobgriefing.others")) {
             player.sendMessage(ChatColor.RED + "You can't toggle mob griefing on someone else's claim!");
             return;
-        } else if (selectedClaim.getOwner() == player.getUniqueId()
+        } else if (selectedClaim.getOwner().equals(player.getUniqueId())
                 && !player.hasPermission("slc.togglemobgriefing.self")) {
             player.sendMessage(ChatColor.RED
                     + "You aren't allowed to toggle mob griefing on your own claims!");
