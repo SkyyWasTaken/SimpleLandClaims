@@ -3,19 +3,13 @@ package com.skyywastaken.simplelandclaims.command.subcommand;
 import com.skyywastaken.simplelandclaims.claim.tracking.ClaimTracker;
 import com.skyywastaken.simplelandclaims.claim.tracking.LandClaim;
 import com.skyywastaken.simplelandclaims.command.CommandUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 
 public class SLCCheckCommand implements SubCommand {
     private final ClaimTracker CLAIM_TRACKER;

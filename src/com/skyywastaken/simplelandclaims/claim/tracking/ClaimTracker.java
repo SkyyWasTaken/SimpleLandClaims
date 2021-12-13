@@ -3,9 +3,7 @@ package com.skyywastaken.simplelandclaims.claim.tracking;
 import com.skyywastaken.simplelandclaims.claim.creation.ClaimHelper;
 import org.bukkit.Location;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 
 public class ClaimTracker {

@@ -3,7 +3,6 @@ package com.skyywastaken.simplelandclaims;
 import com.skyywastaken.simplelandclaims.claim.tracking.ClaimTracker;
 import com.skyywastaken.simplelandclaims.command.SLCCommand;
 import com.skyywastaken.simplelandclaims.listener.MobListener;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SimpleLandClaims extends JavaPlugin {

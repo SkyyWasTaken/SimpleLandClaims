@@ -2,12 +2,10 @@ package com.skyywastaken.simplelandclaims.claim.tracking;
 
 import org.bukkit.Location;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class LandClaim {
     private final UUID owner;
-    private ArrayList<UUID> members;
     private ClaimPosition pos1;
     private ClaimPosition pos2;
     private boolean mobGriefingDisabled = false;
