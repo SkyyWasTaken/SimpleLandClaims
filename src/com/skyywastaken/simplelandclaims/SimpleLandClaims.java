@@ -3,18 +3,14 @@ package com.skyywastaken.simplelandclaims;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.skyywastaken.simplelandclaims.claim.tracking.ClaimTracker;
-import com.skyywastaken.simplelandclaims.claim.tracking.LandClaim;
 import com.skyywastaken.simplelandclaims.command.SLCCommand;
 import com.skyywastaken.simplelandclaims.listener.MobListener;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.Collections;
-import java.util.LinkedList;
 
 public class SimpleLandClaims extends JavaPlugin {
     private ClaimTracker CLAIM_TRACKER;

@@ -30,12 +30,13 @@ public class SLCCommand implements CommandExecutor, TabCompleter {
         this.CLAIM_TRACKER = claimTracker;
         registerCommands();
     }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String subcommand, String[] args) {
-        if(args.length < 1) {
+        if (args.length < 1) {
             return true;
         }
-        if(subCommandHashMap.containsKey(args[0])) {
+        if (subCommandHashMap.containsKey(args[0])) {
             SubCommand subCommand = subCommandHashMap.get(args[0]);
             if (!commandSender.hasPermission(subCommand.getPermission())) {
                 commandSender.sendMessage(ChatColor.BOLD + "" + ChatColor.RED

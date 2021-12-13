@@ -14,30 +14,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class SLCClaimCommand implements SubCommand{
+public class SLCClaimCommand implements SubCommand {
     private final ClaimTracker CLAIM_TRACKER;
+
     public SLCClaimCommand(ClaimTracker passedTracker) {
         this.CLAIM_TRACKER = passedTracker;
     }
+
     @Override
     public void executeCommand(CommandSender commandSender, Command command, String[] args) {
-        if(commandSender instanceof Player player) {
+        if (commandSender instanceof Player player) {
             UUID newOwner;
-            if(args.length > 0 && player.hasPermission("slc.claim.others")) {
+            if (args.length > 0 && player.hasPermission("slc.claim.others")) {
                 Player possibleTarget = Bukkit.getPlayer(args[0]);
-                if(possibleTarget != null) {
+                if (possibleTarget != null) {
                     newOwner = possibleTarget.getUniqueId();
                 } else {
                     try {
                         newOwner = UUID.fromString(args[0]);
                         player.sendMessage(ChatColor.GREEN + "Successfully loaded UUID " + newOwner);
-                    } catch(IllegalArgumentException e) {
+                    } catch (IllegalArgumentException e) {
                         player.sendMessage(ChatColor.RED + args[0] + " either doesn't exist or is not online!");
                         return;
                     }
                 }
             } else {
-                if(commandSender.hasPermission("slc.claim.self")) {
+                if (commandSender.hasPermission("slc.claim.self")) {
                     newOwner = player.getUniqueId();
                 } else {
                     commandSender.sendMessage("You aren't allowed to claim land for yourself!");
@@ -64,7 +66,7 @@ public class SLCClaimCommand implements SubCommand{
 
     private boolean checkPreConditionsAndWarn(Player landClaimer, UUID owner) {
         ClaimHelper claimHelper = this.CLAIM_TRACKER.getClaimCreationHelper();
-        if(!claimHelper.playerHasBothPositions(landClaimer.getUniqueId())) {
+        if (!claimHelper.playerHasBothPositions(landClaimer.getUniqueId())) {
             landClaimer.sendMessage("You don't have both of your positions set! Use /slc pos1 and "
                     + "/slc pos2 to select an area!");
             return false;
@@ -74,10 +76,10 @@ public class SLCClaimCommand implements SubCommand{
         } else if (claimHelper.claimIsTooDeep(landClaimer.getUniqueId())) {
             landClaimer.sendMessage("Your claim is too deep! Make the Z length 500 blocks or less!");
             return false;
-        } else if(!claimHelper.bothPositionsAreInSameDimension(landClaimer.getUniqueId())) {
+        } else if (!claimHelper.bothPositionsAreInSameDimension(landClaimer.getUniqueId())) {
             landClaimer.sendMessage("Your claim spans multiple dimensions! That's definitely not allowed!");
             return false;
-        } else if(this.CLAIM_TRACKER.playerHasTwentyOrMoreClaims(owner)) {
+        } else if (this.CLAIM_TRACKER.playerHasTwentyOrMoreClaims(owner)) {
             landClaimer.sendMessage("You have twenty or more claims! Unclaim some land to claim more.");
             return false;
         }

@@ -14,8 +14,19 @@ public class PlayerClaimPositions {
         return pos1;
     }
 
+    void setPos1(Location passedLocation) {
+        if (passedLocation.getWorld() == null) {
+            return;
+        }
+        this.pos1 = passedLocation;
+    }
+
     Location getPos2() {
         return pos2;
+    }
+
+    void setPos2(Location passedLocation) {
+        this.pos2 = passedLocation;
     }
 
     int getWidth() {
@@ -26,19 +37,8 @@ public class PlayerClaimPositions {
         return Math.max(pos1.getBlockZ(), pos2.getBlockZ()) - Math.min(pos1.getBlockZ(), pos2.getBlockZ());
     }
 
-    void setPos1(Location passedLocation) {
-        if(passedLocation.getWorld() == null) {
-            return;
-        }
-        this.pos1 = passedLocation;
-    }
-
-    void setPos2(Location passedLocation) {
-        this.pos2 = passedLocation;
-    }
-
     boolean bothPositionsAreInSameDimension() {
-        if(this.pos1.getWorld() == null || this.pos2.getWorld() == null) {
+        if (this.pos1.getWorld() == null || this.pos2.getWorld() == null) {
             return false;
         }
         return this.pos1.getWorld().getEnvironment() == this.pos2.getWorld().getEnvironment();

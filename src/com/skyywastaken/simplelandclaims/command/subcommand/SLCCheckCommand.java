@@ -13,12 +13,14 @@ import java.util.List;
 
 public class SLCCheckCommand implements SubCommand {
     private final ClaimTracker CLAIM_TRACKER;
+
     public SLCCheckCommand(ClaimTracker claimTracker) {
         this.CLAIM_TRACKER = claimTracker;
     }
+
     @Override
     public void executeCommand(CommandSender commandSender, Command command, String[] args) {
-        if(commandSender instanceof Player player) {
+        if (commandSender instanceof Player player) {
             if (this.CLAIM_TRACKER.posIsInClaim(player.getLocation())) {
                 LinkedList<LandClaim> claimList = this.CLAIM_TRACKER.getLandClaimsAtPosition(player.getLocation());
                 commandSender.sendMessage(CommandUtils.getClaimsStringFromClaims(claimList));

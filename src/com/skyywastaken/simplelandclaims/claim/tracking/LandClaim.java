@@ -16,7 +16,7 @@ public class LandClaim {
     }
 
     private void setPositionsFromPos(Location pos1, Location pos2) {
-        if(pos1.getWorld() == null || pos1.getWorld() == null) {
+        if (pos1.getWorld() == null || pos1.getWorld() == null) {
             return;
         }
         int lowerX = Math.min(pos1.getBlockX(), pos2.getBlockX());

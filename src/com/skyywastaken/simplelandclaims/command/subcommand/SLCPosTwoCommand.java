@@ -12,14 +12,16 @@ import java.util.List;
 
 public class SLCPosTwoCommand implements SubCommand {
     private final ClaimTracker CLAIM_TRACKER;
+
     public SLCPosTwoCommand(ClaimTracker tracker) {
         this.CLAIM_TRACKER = tracker;
     }
+
     @Override
     public void executeCommand(CommandSender commandSender, Command command, String[] args) {
-        if(commandSender instanceof Player player) {
+        if (commandSender instanceof Player player) {
             Location playerLocation = player.getLocation();
-            if(playerLocation.getWorld() == null) {
+            if (playerLocation.getWorld() == null) {
                 return;
             }
             this.CLAIM_TRACKER.getClaimCreationHelper().addPosTwoForPlayer(player.getUniqueId(), playerLocation);

@@ -39,7 +39,7 @@ public class ClaimHelper {
     }
 
     private void checkForPlayerAndAdd(UUID playerUUID) {
-        if(!this.potentialClaimPositions.containsKey(playerUUID)) {
+        if (!this.potentialClaimPositions.containsKey(playerUUID)) {
             this.potentialClaimPositions.put(playerUUID, new PlayerClaimPositions());
         }
     }
