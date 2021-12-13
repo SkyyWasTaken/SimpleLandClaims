@@ -8,7 +8,9 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -42,8 +44,29 @@ public class SLCRemoveCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getTabCompletions(CommandSender commandSender, Command command, String s, String[] strings) {
-        return Collections.singletonList("");
+    public List<String> getTabCompletions(CommandSender commandSender, Command command, String[] args) {
+        if (!(commandSender instanceof Player player) || args.length != 1) {
+            return new ArrayList<>();
+        }
+        var possibleCompletionList = new ArrayList<String>();
+        UUID playerUUID = player.getUniqueId();
+        if (this.CACHED_CLAIM_RESULTS.containsKey(playerUUID)) {
+            int i = 1;
+            for (LandClaim currentClaim : this.CACHED_CLAIM_RESULTS.get(playerUUID)) {
+                if (currentClaim.getOwner() == playerUUID && commandSender.hasPermission("slc.removeclaim.self")
+                        || currentClaim.getOwner() != playerUUID
+                        && commandSender.hasPermission("slc.removeclaim.others")) {
+                    possibleCompletionList.add(Integer.toString(i));
+                }
+                i++;
+            }
+        }
+        if (this.CONFIRMATION_CACHE.containsKey(player.getUniqueId())) {
+            possibleCompletionList.add("confirm");
+        }
+        var returnList = new ArrayList<String>();
+        StringUtil.copyPartialMatches(args[0], possibleCompletionList, returnList);
+        return returnList;
     }
 
     @Override
@@ -60,6 +83,10 @@ public class SLCRemoveCommand implements SubCommand {
         Location playerLocation = sender.getLocation();
         StringBuilder builder = new StringBuilder();
         LinkedList<LandClaim> claims = this.CLAIM_TRACKER.getLandClaimsAtPosition(playerLocation);
+        if (claims.size() == 0) {
+            sender.sendMessage(ChatColor.RED + "There are no claims here!");
+            return;
+        }
         builder.append(CommandUtils.getClaimsStringFromClaims(claims));
         builder.append(ChatColor.BOLD).append(ChatColor.LIGHT_PURPLE)
                 .append("Type /slc remove (number) to remove a claim!");

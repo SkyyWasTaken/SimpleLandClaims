@@ -7,7 +7,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,8 +37,27 @@ public class SLCToggleMobGriefingCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getTabCompletions(CommandSender commandSender, Command command, String s, String[] strings) {
-        return null;
+    public List<String> getTabCompletions(CommandSender commandSender, Command command, String[] strings) {
+        if (!(commandSender instanceof Player player) || strings.length != 1) {
+            return new ArrayList<>();
+        }
+        var possibleCompletions = new ArrayList<String>();
+        int i = 1;
+        UUID playerUUID = player.getUniqueId();
+        if (this.CACHED_CLAIMS.containsKey(playerUUID)) {
+            for (LandClaim currentClaim : this.CACHED_CLAIMS.get(playerUUID)) {
+                if (currentClaim.getOwner() == playerUUID
+                        && commandSender.hasPermission("slc.togglemobgriefing.self")
+                        || currentClaim.getOwner() != playerUUID
+                        && commandSender.hasPermission("slc.togglemobgriefing.others")) {
+                    possibleCompletions.add(Integer.toString(i));
+                }
+                i++;
+            }
+        }
+        var returnList = new ArrayList<String>();
+        StringUtil.copyPartialMatches(strings[0], possibleCompletions, returnList);
+        return returnList;
     }
 
     private void handleListClaims(Player passedPlayer) {

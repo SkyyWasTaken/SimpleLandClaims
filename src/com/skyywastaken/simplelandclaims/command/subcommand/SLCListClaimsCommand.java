@@ -10,6 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,8 +66,12 @@ public class SLCListClaimsCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getTabCompletions(CommandSender commandSender, Command command, String s, String[] strings) {
-        return Collections.singletonList("");
+    public List<String> getTabCompletions(CommandSender commandSender, Command command, String[] args) {
+        if (args.length == 1 && commandSender.hasPermission("slc.listclaims.others")) {
+            return null;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override

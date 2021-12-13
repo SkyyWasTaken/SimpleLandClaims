@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,8 +32,8 @@ public class SLCPosOneCommand implements SubCommand {
     }
 
     @Override
-    public List<String> getTabCompletions(CommandSender commandSender, Command command, String s, String[] strings) {
-        return Collections.singletonList("");
+    public List<String> getTabCompletions(CommandSender commandSender, Command command, String[] strings) {
+        return new ArrayList<>();
     }
 
     @Override
