@@ -59,8 +59,6 @@ public class SLCRemoveCommand implements SubCommand {
     private void handleRemoveList(Player sender) {
         Location playerLocation = sender.getLocation();
         StringBuilder builder = new StringBuilder();
-        builder.append(ChatColor.AQUA).append(ChatColor.UNDERLINE).append(ChatColor.BOLD).append("Remove a claim\n")
-                .append(ChatColor.RESET);
         LinkedList<LandClaim> claims = this.CLAIM_TRACKER.getLandClaimsAtPosition(playerLocation);
         builder.append(CommandUtils.getClaimsStringFromClaims(claims));
         builder.append(ChatColor.BOLD).append(ChatColor.LIGHT_PURPLE)
@@ -97,10 +95,10 @@ public class SLCRemoveCommand implements SubCommand {
             return;
         }
         LandClaim claim = this.CACHED_CLAIM_RESULTS.get(player.getUniqueId()).get(selectedInt - 1);
-        if (!claim.getOwner().equals(player.getUniqueId()) && !player.hasPermission("slc.removeclaim.others")) {
+        if (claim.getOwner() != player.getUniqueId() && !player.hasPermission("slc.removeclaim.others")) {
             player.sendMessage(ChatColor.RED + "You don't have permission to remove someone else's claim!");
             return;
-        } else if (!player.hasPermission("slc.removeclaim.self")) {
+        } else if (claim.getOwner() == player.getUniqueId() && !player.hasPermission("slc.removeclaim.self")) {
             player.sendMessage("You don't have permission to remove your own claims!");
             return;
         }

@@ -40,3 +40,10 @@ permissions:
         default: true
       slc.removeclaim.others:
         default: op
+  slc.togglemobgriefing:
+    description: Allows the player to toggle mob griefing
+    children:
+      slc.togglemobgriefing.self:
+        default: true
+      slc.togglemobgriefing.others:
+        default: op

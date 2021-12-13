@@ -6,6 +6,7 @@ import com.skyywastaken.simplelandclaims.command.subcommand.SLCClaimCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCPosOneCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCPosTwoCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCRemoveCommand;
+import com.skyywastaken.simplelandclaims.command.subcommand.SLCToggleMobGriefingCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -31,7 +32,6 @@ public class SLCCommand implements CommandExecutor, TabCompleter {
         if(args.length < 1) {
             return true;
         }
-        System.out.println(args[0]);
         if(subCommandHashMap.containsKey(args[0])) {
             SubCommand subCommand = subCommandHashMap.get(args[0]);
             if (!commandSender.hasPermission(subCommand.getPermission())) {
@@ -58,5 +58,6 @@ public class SLCCommand implements CommandExecutor, TabCompleter {
         registerCommand(new SLCClaimCommand(this.CLAIM_TRACKER));
         registerCommand(new SLCCheckCommand(this.CLAIM_TRACKER));
         registerCommand(new SLCRemoveCommand(this.CLAIM_TRACKER));
+        registerCommand(new SLCToggleMobGriefingCommand(this.CLAIM_TRACKER));
     }
 }

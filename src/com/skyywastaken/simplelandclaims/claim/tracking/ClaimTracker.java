@@ -61,14 +61,4 @@ public class ClaimTracker {
         }
         return claimCount >= 20;
     }
-
-    public List<UUID> getOwnersFromLocation(Location passedLocation) {
-        ArrayList<UUID> owners = new ArrayList<>();
-        for(LandClaim landClaim : this.CLAIMS) {
-            if(landClaim.positionIsInClaim(passedLocation)) {
-                owners.add(landClaim.getOwner());
-            }
-        }
-        return owners;
-    }
 }

@@ -43,8 +43,8 @@ public class LandClaim {
             return false;
         }
         return location.getWorld().getEnvironment() == pos1.dimension()
-                && (location.getBlockX() > pos1.x() && location.getBlockZ() > pos1.z())
-                && (location.getBlockX() < pos2.x() && location.getBlockZ() < pos2.z());
+                && (location.getBlockX() >= pos1.x() && location.getBlockZ() >= pos1.z())
+                && (location.getBlockX() <= pos2.x() && location.getBlockZ() <= pos2.z());
     }
 
     public UUID getOwner() {
@@ -53,5 +53,9 @@ public class LandClaim {
 
     public boolean isMobGriefingDisabled() {
         return mobGriefingDisabled;
+    }
+
+    public void toggleMobGriefing() {
+        this.mobGriefingDisabled = !this.mobGriefingDisabled;
     }
 }

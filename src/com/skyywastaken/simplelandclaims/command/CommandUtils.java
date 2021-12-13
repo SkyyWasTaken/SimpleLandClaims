@@ -18,21 +18,24 @@ public class CommandUtils {
 
     public static String getClaimsStringFromClaims(LinkedList<LandClaim> claims) {
         StringBuilder list = new StringBuilder();
+        list.append(ChatColor.AQUA).append(ChatColor.BOLD).append("CLAIM LIST").append("\n");
         int i = 1;
         for (LandClaim claim : claims) {
             list.append(ChatColor.RED).append(i++).append(". ")
-                    .append(ChatColor.GREEN).append("x: (")
-                    .append(ChatColor.GOLD).append(claim.getPosOne().x())
+                    .append(ChatColor.GREEN).append("(")
+                    .append(ChatColor.LIGHT_PURPLE).append(claim.getPosOne().x())
                     .append(ChatColor.GREEN).append(", ")
-                    .append(ChatColor.GOLD).append(claim.getPosTwo().x())
-                    .append(ChatColor.GREEN).append("), z: (")
-                    .append(ChatColor.GOLD).append(claim.getPosOne().z())
+                    .append(ChatColor.LIGHT_PURPLE).append(claim.getPosOne().z())
+                    .append(ChatColor.GREEN).append(") - (")
+                    .append(ChatColor.LIGHT_PURPLE).append(claim.getPosTwo().x())
                     .append(ChatColor.GREEN).append(", ")
-                    .append(ChatColor.GOLD).append(claim.getPosTwo().z())
-                    .append(ChatColor.GREEN).append(") Owner: ")
+                    .append(ChatColor.LIGHT_PURPLE).append(claim.getPosTwo().z())
+                    .append(ChatColor.GREEN).append("), O: ")
                     .append(ChatColor.AQUA).append(Bukkit.getServer().getOfflinePlayer(claim.getOwner()).getName())
+                    .append(ChatColor.GREEN).append(", MG: ")
+                    .append(claim.isMobGriefingDisabled() ? ChatColor.AQUA + "NO" : ChatColor.DARK_RED + "YES")
                     .append(ChatColor.RESET).append("\n");
         }
-        return list.toString();
+        return list.toString().trim();
     }
 }
