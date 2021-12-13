@@ -29,6 +29,16 @@ public class ClaimTracker {
         return this.claimCreationHelper;
     }
 
+    public LinkedList<LandClaim> getClaimsByOwner(UUID ownerUUID) {
+        var claims = new LinkedList<LandClaim>();
+        for (LandClaim currentClaim : this.CLAIMS) {
+            if (currentClaim.getOwner() == ownerUUID) {
+                claims.add(currentClaim);
+            }
+        }
+        return claims;
+    }
+
     public boolean posIsInClaim(Location location) {
         for (LandClaim currentClaim : CLAIMS) {
             if (currentClaim.positionIsInClaim(location)) {
@@ -39,7 +49,7 @@ public class ClaimTracker {
     }
 
     public LinkedList<LandClaim> getLandClaimsAtPosition(Location locationToCheck) {
-        LinkedList<LandClaim> claims = new LinkedList<>();
+        var claims = new LinkedList<LandClaim>();
         for (LandClaim claim : this.CLAIMS) {
             if (claim.positionIsInClaim(locationToCheck)) {
                 claims.add(claim);

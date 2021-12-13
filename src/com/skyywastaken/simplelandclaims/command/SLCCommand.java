@@ -3,6 +3,7 @@ package com.skyywastaken.simplelandclaims.command;
 import com.skyywastaken.simplelandclaims.claim.tracking.ClaimTracker;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCCheckCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCClaimCommand;
+import com.skyywastaken.simplelandclaims.command.subcommand.SLCListClaimsCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCPosOneCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCPosTwoCommand;
 import com.skyywastaken.simplelandclaims.command.subcommand.SLCRemoveCommand;
@@ -37,6 +38,7 @@ public class SLCCommand implements CommandExecutor, TabCompleter {
             if (!commandSender.hasPermission(subCommand.getPermission())) {
                 commandSender.sendMessage(ChatColor.BOLD + "" + ChatColor.RED
                         + "You do not have permission to use this command.");
+                return true;
             }
             subCommandHashMap.get(args[0]).executeCommand(commandSender, command, Arrays.copyOfRange(args, 1, args.length));
         }
@@ -59,5 +61,6 @@ public class SLCCommand implements CommandExecutor, TabCompleter {
         registerCommand(new SLCCheckCommand(this.CLAIM_TRACKER));
         registerCommand(new SLCRemoveCommand(this.CLAIM_TRACKER));
         registerCommand(new SLCToggleMobGriefingCommand(this.CLAIM_TRACKER));
+        registerCommand(new SLCListClaimsCommand(this.CLAIM_TRACKER));
     }
 }
